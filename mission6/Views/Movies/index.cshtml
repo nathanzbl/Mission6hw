@@ -1,0 +1,39 @@
+@model List<mission6.Models.Movie>
+
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<h1>Movies</h1>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Category</th>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Director</th>
+        <th>Rating</th>
+        <th>Edited</th>
+        <th>Lent To</th>
+        <th>Notes</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var m in Model)
+    {
+        <tr>
+            <td>@m.MovieCategory?.Name</td>
+            <td>@m.Title</td>
+            <td>@m.Year</td>
+            <td>@m.Director</td>
+            <td>@(m.Rating == mission6.Models.Rating.PG13 ? "PG-13" : m.Rating.ToString())</td>
+            <td>@(m.Edited.HasValue ? (m.Edited.Value ? "Yes" : "No") : "")</td>
+            <td>@m.LentTo</td>
+            <td>@m.Notes</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-controller="Movies" asp-action="Create">Add Another Movie</a>
